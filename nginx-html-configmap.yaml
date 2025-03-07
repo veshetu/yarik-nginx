@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-html-config  # Имя ConfigMap
+data:
+  index.html: |  # Ключ и данные для HTML-страницы
+    <!DOCTYPE html>
+    <html>
+    <head><title>Hello World</title></head>
+    <body><h1>Hello World</h1></body>
+    </html>

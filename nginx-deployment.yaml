@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment  # Имя Deployment
+  labels:
+    app: nginx  # Метка для поиска и управления
+spec:
+  replicas: 2  # Количество реплик (подов)
+  selector:
+    matchLabels:
+      app: nginx  # Селектор для управления подами с этой меткой
+  template:
+    metadata:
+      labels:
+        app: nginx  # Метка для подов
+    spec:
+      containers:
+      - name: nginx  # Имя контейнера
+        image: nginx:latest  # Используемый образ Nginx
+        ports:
+        - containerPort: 80  # Порт, который будет открыт в контейнере
+        volumeMounts:
+        - name: html-volume  # Монтирование volume для хранения HTML-страницы
+          mountPath: /usr/share/nginx/html
+      volumes:
+      - name: html-volume  # Определение volume
+        configMap:
+          name: nginx-html-config  # Использование ConfigMap для хранения HTML-страницы
+

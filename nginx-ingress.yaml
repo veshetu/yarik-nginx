@@ -1,0 +1,18 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: nginx-ingress  # Имя Ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /  # Аннотация для перенаправления запросов
+spec:
+  rules:
+  - host: example.com  # Домен, по которому будет доступен Ingress
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: nginx-service  # Имя Service, к которому будет перенаправляться трафик
+            port:
+              number: 80  # Порт Service
